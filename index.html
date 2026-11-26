@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Presentación interactiva sobre la historia, el negocio y la cultura global de Coca-Cola.">
+  <title>Coca-Cola | Icono Global</title>
+  <style>
+    :root{
+      --red:#e31b23; --deep:#a90f18; --ink:#211d1d; --muted:#706767;
+      --cream:#fff8f3; --white:#fff; --line:#f0d9d7; --gold:#f5c65b;
+      --shadow:0 18px 50px rgba(90,15,20,.12);
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--ink);background:var(--cream);line-height:1.6}
+    a{color:inherit;text-decoration:none}
+    .topbar{position:sticky;top:0;z-index:20;background:rgba(255,248,243,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+    .nav{max-width:1180px;margin:auto;padding:13px 24px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+    .brand{display:flex;align-items:center;gap:10px;font-weight:900;letter-spacing:-.7px}
+    .brand-mark{display:grid;place-items:center;width:34px;height:34px;border-radius:50%;background:var(--red);color:white;font-weight:900;font-size:19px}
+    .navlinks{display:flex;gap:20px;align-items:center;font-size:.9rem;color:#594d4d}
+    .navlinks a:hover{color:var(--red)}
+    .pill{background:var(--red);color:white;padding:9px 16px;border-radius:999px;font-weight:750}
+    .hero{position:relative;overflow:hidden;background:linear-gradient(125deg,#b70d19 0%,#e31b23 55%,#fa5a51 100%);color:#fff}
+    .hero:before,.hero:after{content:"";position:absolute;border:1px solid rgba(255,255,255,.16);border-radius:50%;width:440px;height:440px;right:-100px;top:-220px}
+    .hero:after{width:620px;height:620px;right:-190px;top:-310px}
+    .hero-inner{max-width:1180px;margin:auto;padding:92px 24px 86px;position:relative;z-index:1}
+    .eyebrow{font-size:.76rem;font-weight:850;letter-spacing:2px;text-transform:uppercase;opacity:.82}
+    h1{font-size:clamp(3.2rem,8vw,6.7rem);line-height:.94;letter-spacing:-5px;margin:18px 0 22px;max-width:850px}
+    .hero p{font-size:clamp(1.05rem,2vw,1.3rem);max-width:660px;color:#ffe7e4}
+    .hero-meta{display:flex;gap:12px;flex-wrap:wrap;margin-top:32px}
+    .hero-meta span{border:1px solid rgba(255,255,255,.35);background:rgba(255,255,255,.1);padding:8px 13px;border-radius:999px;font-size:.85rem}
+    .section{max-width:1180px;margin:auto;padding:76px 24px}
+    .section-head{display:flex;justify-content:space-between;align-items:end;gap:24px;margin-bottom:32px}
+    .kicker{color:var(--red);font-weight:850;font-size:.75rem;letter-spacing:1.8px;text-transform:uppercase}
+    h2{font-size:clamp(2rem,4vw,3.25rem);letter-spacing:-1.7px;line-height:1.05;margin:9px 0 0}
+    .intro{color:var(--muted);max-width:510px;margin:0}
+    .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:18px}
+    .card{background:var(--white);border:1px solid var(--line);border-radius:22px;padding:25px;box-shadow:0 8px 28px rgba(90,15,20,.045)}
+    .card h3{margin:0 0 9px;font-size:1.2rem;letter-spacing:-.4px}
+    .card p{margin:0;color:var(--muted)}
+    .span-4{grid-column:span 4}.span-6{grid-column:span 6}.span-8{grid-column:span 8}.span-12{grid-column:span 12}
+    .number{font-size:2.4rem;line-height:1;font-weight:950;color:var(--red);letter-spacing:-1.5px;margin-bottom:12px}
+    .metric{background:var(--red);color:white;border:0;min-height:175px;display:flex;flex-direction:column;justify-content:space-between}
+    .metric .number{color:white;font-size:2.8rem}.metric p{color:#ffe4e2}
+    .timeline{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+    .time-item{position:relative;padding:20px 17px 18px;border-top:3px solid var(--red);background:white;border-radius:0 0 16px 16px}
+    .year{font-weight:950;color:var(--red);font-size:1.5rem}
+    .time-item h3{font-size:1rem;margin:5px 0}
+    .time-item p{font-size:.9rem;color:var(--muted);margin:0}
+    .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}
+    .step{padding:23px;background:#fff;border:1px solid var(--line);border-radius:18px}
+    .step-no{width:34px;height:34px;display:grid;place-items:center;background:#ffeded;color:var(--red);font-weight:900;border-radius:50%;margin-bottom:14px}
+    .milestone{display:grid;grid-template-columns:70px 1fr;gap:18px;align-items:start;padding:20px 0;border-bottom:1px solid var(--line)}
+    .milestone:last-child{border:0}
+    .milestone .year{font-size:1.1rem}
+    .milestone p{margin:4px 0 0;color:var(--muted)}
+    .dark-section{background:#211d1d;color:white}
+    .dark-section .section{padding-top:72px;padding-bottom:72px}
+    .dark-section .intro,.dark-section .card p{color:#c9bdbd}
+    .dark-section .card{background:#302929;border-color:#493b3b}
+    .dark-section .kicker{color:#ff8585}
+    .warning{border-left:4px solid var(--gold);padding:18px 20px;background:#fff5d9;border-radius:0 14px 14px 0;color:#55421b}
+    .game-wrap{background:linear-gradient(135deg,#fff 0%,#fff0ee 100%);border:1px solid var(--line);border-radius:28px;padding:clamp(22px,4vw,42px);box-shadow:var(--shadow)}
+    .game-top{display:flex;justify-content:space-between;gap:15px;align-items:center;flex-wrap:wrap;margin-bottom:20px}
+    .game-label{font-size:.8rem;font-weight:850;letter-spacing:1px;color:var(--red);text-transform:uppercase}
+    .score{background:#211d1d;color:white;border-radius:999px;padding:8px 14px;font-weight:800}
+    .progress{height:8px;background:#f2d6d4;border-radius:99px;overflow:hidden;margin:14px 0 25px}
+    .progress-bar{height:100%;width:0;background:var(--red);transition:width .3s}
+    #question{font-size:clamp(1.25rem,3vw,1.8rem);line-height:1.25;margin:0 0 20px;letter-spacing:-.5px}
+    .answers{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .answer{border:1.5px solid #ead1cf;background:white;border-radius:14px;padding:15px 17px;text-align:left;font:inherit;font-weight:700;cursor:pointer;transition:.2s}
+    .answer:hover:not(:disabled){border-color:var(--red);transform:translateY(-2px)}
+    .answer:disabled{cursor:default;opacity:1}
+    .answer.correct{background:#e7f7ec;border-color:#2e9b54;color:#176333}
+    .answer.wrong{background:#fff0ee;border-color:var(--red);color:#a90f18}
+    .feedback{min-height:48px;margin:17px 0 8px;font-weight:700}
+    .game-actions{display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap}
+    .btn{border:0;background:var(--red);color:white;padding:12px 20px;border-radius:999px;font:inherit;font-weight:850;cursor:pointer}
+    .btn:hover{background:var(--deep)}
+    .btn:disabled{opacity:.4;cursor:not-allowed}
+    .btn.secondary{background:#211d1d}
+    .result{text-align:center;padding:18px 0 4px}
+    .result .big-score{font-size:4rem;font-weight:950;line-height:1;color:var(--red);margin:10px 0}
+    footer{background:#171313;color:#cdbebe;text-align:center;padding:30px 24px;font-size:.85rem}
+    footer strong{color:white}
+    @media(max-width:800px){.navlinks{display:none}.timeline{grid-template-columns:1fr 1fr}.span-4,.span-6,.span-8{grid-column:span 6}.steps{grid-template-columns:1fr}}
+    @media(max-width:560px){.hero-inner{padding:70px 22px}.section{padding:56px 20px}.section-head{display:block}.intro{margin-top:14px}.timeline,.answers{grid-template-columns:1fr}.span-4,.span-6,.span-8,.span-12{grid-column:span 12}h1{letter-spacing:-3px}.milestone{grid-template-columns:55px 1fr}}
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <nav class="nav">
+      <a class="brand" href="#inicio"><span class="brand-mark">C</span><span>COCA-COLA <span style="color:var(--red)">/</span> ICONO GLOBAL</span></a>
+      <div class="navlinks">
+        <a href="#historia">Historia</a><a href="#negocio">Negocio</a><a href="#cultura">Cultura</a><a href="#sostenibilidad">Sostenibilidad</a>
+      </div>
+      <a class="pill" href="#juego">Jugar ahora</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="inicio">
+      <div class="hero-inner">
+        <div class="eyebrow">The Coca-Cola Company · 1886–2026</div>
+        <h1>Coca-Cola:<br>Icono Global</h1>
+        <p>De una farmacia en Atlanta en 1886 a una marca reconocida en todo el planeta: historia, modelo de negocio, cultura pop y sostenibilidad.</p>
+        <div class="hero-meta"><span>01 — Orígenes</span><span>02 — Finanzas</span><span>03 — Cultura pop</span><span>04 — Sostenibilidad</span></div>
+      </div>
+    </section>
+
+    <section class="section" id="historia">
+      <div class="section-head">
+        <div><div class="kicker">01 · Sus inicios</div><h2>De farmacia a imperio</h2></div>
+        <p class="intro">La historia comienza en Atlanta y crece gracias a una identidad reconocible, una estrategia de accesibilidad y una red de distribución.</p>
+      </div>
+      <div class="grid" style="margin-bottom:28px">
+        <article class="card span-4"><div class="number">5¢</div><h3>Un precio histórico</h3><p>La presentación señala que el precio se mantuvo durante 70 años, entre 1886 y 1959, como estrategia de volumen y accesibilidad.</p></article>
+        <article class="card span-8"><h3>Una marca que se construyó con el tiempo</h3><p>Desde la fórmula original hasta el sistema de franquicias, cada etapa contribuyó a convertir una bebida local en una operación internacional.</p></article>
+      </div>
+      <div class="timeline">
+        <article class="time-item"><div class="year">1886</div><h3>Fórmula original</h3><p>Dr. John S. Pemberton crea el jarabe en Jacobs' Pharmacy, Atlanta. Se vendían 9 vasos diarios.</p></article>
+        <article class="time-item"><div class="year">1887</div><h3>Identidad Spencerian</h3><p>Frank M. Robinson bautiza la bebida y diseña la caligrafía que perdura hasta hoy.</p></article>
+        <article class="time-item"><div class="year">1892</div><h3>Fundación corporativa</h3><p>Asa Griggs Candler adquiere los derechos, funda la compañía e impulsa cupones gratis.</p></article>
+        <article class="time-item"><div class="year">1899</div><h3>Franquicias</h3><p>Nace la red de embotelladores independientes que permitió escalar internacionalmente.</p></article>
+      </div>
+    </section>
+
+    <section class="section" id="negocio" style="padding-top:25px">
+      <div class="section-head">
+        <div><div class="kicker">02 · Modelo de negocio y finanzas</div><h2>Concentrado y escala global</h2></div>
+        <p class="intro">El modelo combina la producción de concentrados, socios embotelladores y una extensa red de puntos de venta.</p>
+      </div>
+      <div class="grid">
+        <article class="card metric span-4"><div class="number">$47.9B</div><div><h3>Ingresos netos anuales</h3><p>Dato presentado en la exposición.</p></div></article>
+        <article class="card metric span-4"><div class="number">61.6%</div><div><h3>Margen bruto</h3><p>Modelo descrito como ligero en activos fijos.</p></div></article>
+        <article class="card metric span-4"><div class="number">2.200 M</div><div><h3>Raciones diarias</h3><p>Consumo en más de 200 países y territorios.</p></div></article>
+        <article class="card span-4"><h3>1. The Coca-Cola Company</h3><p>Produce jarabes y concentrados, y lidera el marketing global.</p></article>
+        <article class="card span-4"><h3>2. Socios embotelladores</h3><p>Más de 200 socios embotellan, almacenan y distribuyen localmente.</p></article>
+        <article class="card span-4"><h3>3. Puntos de venta</h3><p>Más de 30 millones de puntos acercan los productos al consumidor final.</p></article>
+        <article class="card span-12"><h3>Un portafolio amplio</h3><p>La presentación destaca más de 200 marcas activas en bebidas, dentro de una estructura global de comercialización.</p></article>
+      </div>
+    </section>
+
+    <section class="section" id="cultura" style="padding-top:25px">
+      <div class="section-head">
+        <div><div class="kicker">03 · Marketing, historia y cultura</div><h2>Hitos que marcaron épocas</h2></div>
+        <p class="intro">La identidad visual y las campañas de Coca-Cola han formado parte de momentos reconocibles de la cultura popular.</p>
+      </div>
+      <div class="card">
+        <div class="milestone"><div class="year">1915</div><div><h3>Botella Contour</h3><p>Su silueta fue diseñada para ser reconocible incluso al tacto y en la oscuridad.</p></div></div>
+        <div class="milestone"><div class="year">1931</div><div><h3>Cultura navideña</h3><p>Las ilustraciones de Haddon Sundblom contribuyeron a fijar la imagen moderna de Santa Claus.</p></div></div>
+        <div class="milestone"><div class="year">1971</div><div><h3>Campaña “Hilltop”</h3><p>La campaña “I'd Like to Buy the World a Coke” presentó un mensaje multicultural que marcó una generación.</p></div></div>
+        <div class="milestone"><div class="year">2011</div><div><h3>“Comparte una Coca-Cola”</h3><p>La campaña sustituyó el logotipo por nombres propios en más de 80 países.</p></div></div>
+      </div>
+    </section>
+
+    <div class="dark-section" id="sostenibilidad">
+      <section class="section">
+        <div class="section-head">
+          <div><div class="kicker">04 · Sostenibilidad, salud y controversias</div><h2>Impacto y desafíos globales</h2></div>
+          <p class="intro">La exposición aborda iniciativas de reformulación y agua, junto con cuestionamientos sobre el impacto ambiental y la salud.</p>
+        </div>
+        <div class="grid">
+          <article class="card span-4"><h3>Salud y reformulación</h3><p>La presentación indica que el 68% del portafolio global ofrece opciones bajas o sin calorías, como Coca-Cola Zero Azúcar.</p></article>
+          <article class="card span-4"><h3>Agua y economía circular</h3><p>Se mencionan acciones de reposición hídrica, conservación de cuencas, envases retornables y botellas rPET.</p></article>
+          <article class="card span-4"><h3>Controversias y escrutinio</h3><p>Persisten debates sobre plásticos de un solo uso, gestión hídrica en zonas vulnerables y consumo excesivo de azúcar.</p></article>
+          <div class="span-12 warning"><strong>Para tener en cuenta:</strong> las cifras y afirmaciones de esta página reproducen los datos incluidos en la presentación proporcionada; conviene verificar su año y fuente antes de utilizarlos como cifras actuales.</div>
+        </div>
+      </section>
+    </div>
+
+    <section class="section">
+      <div class="section-head">
+        <div><div class="kicker">Legado atemporal</div><h2>140 años refrescando el mundo</h2></div>
+        <p class="intro">La presentación resume su permanencia en tres pilares: identidad, capilaridad logística y evolución sostenible.</p>
+      </div>
+      <div class="grid">
+        <article class="card span-4"><div class="number">01</div><h3>Identidad inconfundible</h3><p>Rojo vibrante, caligrafía Spencerian y botella Contour.</p></article>
+        <article class="card span-4"><div class="number">02</div><h3>Capilaridad logística</h3><p>Red de embotelladores y distribución en mercados de todo el mundo.</p></article>
+        <article class="card span-4"><div class="number">03</div><h3>Evolución sostenible</h3><p>Transición hacia opciones bajas en calorías, envases rPET y gestión del agua.</p></article>
+      </div>
+    </section>
+
+    <section class="section" id="juego" style="padding-top:15px">
+      <div class="section-head">
+        <div><div class="kicker">Reto interactivo</div><h2>¿Cuánto sabes de Coca-Cola?</h2></div>
+        <p class="intro">Pon a prueba lo aprendido. Responde las cinco preguntas y descubre tu puntuación.</p>
+      </div>
+      <div class="game-wrap">
+        <div class="game-top"><div class="game-label">Coca-Cola Quiz · 5 preguntas</div><div class="score" id="score">Puntos: 0</div></div>
+        <div class="progress"><div class="progress-bar" id="progress"></div></div>
+        <div id="quiz">
+          <div class="game-label" id="counter">Pregunta 1 de 5</div>
+          <h3 id="question">¿En qué año se creó la fórmula original de Coca-Cola?</h3>
+          <div class="answers" id="answers"></div>
+          <div class="feedback" id="feedback" aria-live="polite"></div>
+          <div class="game-actions"><span id="status" style="color:var(--muted);font-size:.9rem">Selecciona una respuesta.</span><button class="btn" id="next" disabled>Siguiente pregunta →</button></div>
+        </div>
+        <div class="result" id="result" hidden>
+          <div class="game-label">Reto completado</div>
+          <div class="big-score" id="final-score">0/5</div>
+          <h3 id="result-title">¡Buen trabajo!</h3>
+          <p id="result-copy" style="color:var(--muted)"></p>
+          <button class="btn" id="restart">Volver a jugar</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer><strong>COCA-COLA · ICONO GLOBAL</strong><br>Presentación interactiva basada en el archivo proporcionado · 1886–2026</footer>
+
+  <script>
+    const questions = [
+      {q:"¿En qué año se creó la fórmula original de Coca-Cola?",a:["1886","1892","1899","1915"],correct:0,why:"La presentación sitúa la creación de la fórmula en 1886, en Jacobs' Pharmacy de Atlanta."},
+      {q:"¿Quién diseñó la caligrafía Spencerian de la marca?",a:["Asa Griggs Candler","Frank M. Robinson","John S. Pemberton","Haddon Sundblom"],correct:1,why:"Frank M. Robinson bautizó la bebida y diseñó la caligrafía que identifica a la marca."},
+      {q:"¿Qué hito se asocia con el año 1915?",a:["Campaña Hilltop","Botella Contour","Comparte una Coca-Cola","Fundación corporativa"],correct:1,why:"La botella Contour aparece como un hito de 1915."},
+      {q:"Según la presentación, ¿cuál es una función de los socios embotelladores?",a:["Diseñar la fórmula original","Dirigir todas las campañas mundiales","Embotellar y distribuir localmente","Crear la identidad Spencerian"],correct:2,why:"Los socios embotelladores se encargan de embotellar, almacenar y distribuir localmente."},
+      {q:"¿Qué campaña sustituyó el logotipo por nombres propios?",a:["Hilltop","Comparte una Coca-Cola","Cultura navideña","Botella Contour"],correct:1,why:"La campaña “Comparte una Coca-Cola” incorporó nombres propios en los envases."}
+    ];
+    let current=0, points=0, locked=false;
+    const $=id=>document.getElementById(id);
+    function renderQuestion(){
+      locked=false;
+      const item=questions[current];
+      $("counter").textContent=`Pregunta ${current+1} de ${questions.length}`;
+      $("question").textContent=item.q;
+      $("answers").innerHTML="";
+      $("feedback").textContent="";
+      $("status").textContent="Selecciona una respuesta.";
+      $("next").disabled=true;
+      $("next").textContent=current===questions.length-1?"Ver resultado →":"Siguiente pregunta →";
+      $("progress").style.width=`${current/questions.length*100}%`;
+      item.a.forEach((answer,index)=>{
+        const btn=document.createElement("button");
+        btn.className="answer";btn.textContent=answer;
+        btn.addEventListener("click",()=>chooseAnswer(index));
+        $("answers").appendChild(btn);
+      });
+    }
+    function chooseAnswer(index){
+      if(locked)return;
+      locked=true;
+      const item=questions[current];
+      const buttons=[...$("answers").children];
+      buttons.forEach((b,i)=>{
+        b.disabled=true;
+        if(i===item.correct)b.classList.add("correct");
+        else if(i===index)b.classList.add("wrong");
+      });
+      if(index===item.correct){
+        points++;$("feedback").textContent="¡Correcto! "+item.why;
+        $("status").textContent="+1 punto";
+      }else{
+        $("feedback").textContent="No es esa. "+item.why;
+        $("status").textContent="Sigue intentando.";
+      }
+      $("score").textContent=`Puntos: ${points}`;
+      $("next").disabled=false;
+      $("progress").style.width=`${(current+1)/questions.length*100}%`;
+    }
+    function showResult(){
+      $("quiz").hidden=true;$("result").hidden=false;
+      $("final-score").textContent=`${points}/${questions.length}`;
+      let title,copy;
+      if(points===5){title="¡Eres un experto en Coca-Cola!";copy="Dominaste todos los hitos de la presentación. ¡Excelente memoria!";}
+      else if(points>=3){title="¡Muy bien!";copy="Conoces bastante sobre la historia y el negocio de Coca-Cola. Repasa los detalles y vuelve a intentarlo.";}
+      else{title="¡Sigue aprendiendo!";copy="Vuelve a recorrer la presentación y prueba otra vez. Cada intento cuenta.";}
+      $("result-title").textContent=title;$("result-copy").textContent=copy;
+      $("progress").style.width="100%";
+    }
+    $("next").addEventListener("click",()=>{if(!locked)return;if(current<questions.length-1){current++;renderQuestion();}else showResult();});
+    $("restart").addEventListener("click",()=>{current=0;points=0;$("score").textContent="Puntos: 0";$("quiz").hidden=false;$("result").hidden=true;renderQuestion();});
+    renderQuestion();
+  </script>
+</body>
+</html>
